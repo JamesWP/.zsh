@@ -1,3 +1,0 @@
-fpath=('~/.zsh/functions' $fpath)
-
-export fpath
