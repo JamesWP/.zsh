@@ -1,7 +1,6 @@
 #PATH AND FATH
 
-fpath=('~/.zsh/functions' $fpath)
-export fpath
+fpath+=('~/.zsh/functions')
 
 
 export PATH=/usr/local/bin:$PATH
