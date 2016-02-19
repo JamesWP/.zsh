@@ -28,11 +28,15 @@ eval $(thefuck --alias)
 
 
 # prompt
-setopt PROMPT_SUBST
 autoload -U colors && colors
 
 # Zsh to use the same colors as ls
-PROMPT="%{$fg[blue]%}%m %{$fg[yellow]%}$(python ~/.zsh/scripts/path.py) %{$reset_color%}%{$fg[green]>%} %{$reset_color%}"
+function cur_path {
+  python ~/.zsh/scripts/path.py
+}
+setopt PROMPT_SUBST
+get_path='$(cur_path)'
+PROMPT="%{$fg[blue]%}%m %{$fg[yellow]%}${get_path} %{$reset_color%}%{$fg[green]>%} %{$reset_color%}"
 
 # show dir when first tab pressed
 first-tab() {
@@ -65,3 +69,12 @@ alias serve=nws
 alias gs='git status'
 alias speedtest='wget -O /dev/null http://speedtest.wdc01.softlayer.com/downloads/test10.zip'
 
+RBENV_ROOT=/usr/local/var/rbenv
+export RBENV_ROOT
+eval "$(rbenv init -)"
+
+
+if [[ -o login ]]; then
+  curl -s --connect-timeout 1 wttr.in | head -n 7
+else
+fi
